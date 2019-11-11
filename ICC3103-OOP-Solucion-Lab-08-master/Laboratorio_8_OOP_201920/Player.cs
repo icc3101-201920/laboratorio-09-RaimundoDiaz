@@ -101,15 +101,16 @@ namespace Laboratorio_8_OOP_201920
             Card tempCard = CreateTempCard(cardId);
             hand.AddCard(tempCard);
             deck.DestroyCard(cardId);
+            EffectSearch();//no le encuentro mucho sentido a triggerear el evento cuando se roba una carta, pero lo hago igual porque lo dice el enunciado
         }
         public void PlayCard(int cardId, EnumType buffRow = EnumType.None)
         {
-            
             Card tempCard = CreateTempCard(cardId, false);
 
             if (tempCard is CombatCard)
             {
                 board.AddCard(tempCard, this.Id);
+                EffectSearch();
             }
             else
             {
@@ -120,6 +121,7 @@ namespace Laboratorio_8_OOP_201920
                 else
                 {
                     board.AddCard(tempCard);
+                    EffectSearch();
                 }
             }
             hand.DestroyCard(cardId);
@@ -198,7 +200,7 @@ namespace Laboratorio_8_OOP_201920
             }
         }
 
-        protected void EffectSearch()
+        private void EffectSearch()
         {
             foreach (Card card in Deck.Cards)
             {
